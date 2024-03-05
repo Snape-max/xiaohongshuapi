@@ -1,8 +1,11 @@
 from utils import HongshuParser
 from flask import Flask
 from flask_restful import Resource, Api
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "https://snape-max.github.io"}})  # 允许所有域名访问
 api = Api(app)
+
 
 class Parser(Resource):
     def get(self, url, type):
