@@ -17,7 +17,7 @@ def HongshuParser(url: str) -> dict:
         description = re.findall(r'<meta content="(.*?)" name="description"', str(descriptions))[0]
         images = []
         for s in url:
-            images.append("https://sns-img-hw.xhscdn.com/"+re.findall(r'/([^!/]+)!', s)[0] +"?imageView2/2/w/1080/format/png")
+            images.append(re.findall(r'/([^!/]+)!', s)[0])
 
         return {"images": images, "description":description}
     except:
