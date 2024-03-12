@@ -7,16 +7,18 @@ headers = {
     'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 }
 
+
+
 def HongshuParser(url: str) -> dict:
     try:
         html = req.get(url, headers=headers)
         soup = bs4.BeautifulSoup(html.content.decode(),features="lxml")
         images = soup.find_all("meta",attrs={'name': "og:image"})
         descriptions = soup.find_all("meta",attrs={'name': "description"})
-        url = re.findall(r'content="([^"\']*)"', str(images))
+        urls = re.findall(r'content="([^"\']*)"', str(images))
         description = re.findall(r'<meta content="(.*?)" name="description"', str(descriptions))[0]
         images = []
-        for s in url:
+        for s in urls:
             images.append(re.findall(r'/([^!/]+)!', s)[0])
 
         return {"images": images, "description":description}

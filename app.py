@@ -8,16 +8,10 @@ api = Api(app)
 
 
 class Parser(Resource):
-    def get(self, url, type):
-        if type == "short":
-            url = "http://xhslink.com/" + url
-        elif type == "long":
-            url = "https://www.xiaohongshu.com/explore/" + url
-        else:
-            return {}
+    def get(self, url:str):
         return HongshuParser(url)
 
-api.add_resource(Parser, '/api/v1/image/<string:type>/<string:url>')
+api.add_resource(Parser, '/api/v1/image/<string:url>')
 
 @app.route('/')
 def index():
@@ -25,8 +19,7 @@ def index():
     <br>
     <br>
     <center><h2>图片解析</h2></center>
-    <center><p>短连接: 请求：<code>/api/v1/image/short/<链接码></code></p></center>
-    <center><p>长连接: 请求：<code>/api/v1/image/long/<链接码></code></p></center>
+    <center><p>请求：<code>/api/v1/image/<链接></code></p></center>
     """
 
 
