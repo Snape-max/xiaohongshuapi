@@ -11,7 +11,7 @@ class Parser(Resource):
     def get(self, url:str):
         return HongshuParser(url)
 
-api.add_resource(Parser, '/api/v1/image/<string:url>')
+api.add_resource(Parser, '/api/v1/image/<path:url>')
 
 @app.route('/')
 def index():
